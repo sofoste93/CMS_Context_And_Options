@@ -1,0 +1,21 @@
+Public Site vs. Staff Area
+
+# The public context
+
+- Staff can edit content (CRUD)
+- Public can only read content
+- Staff shows all subjects and pages
+- Public shows only visible subjects and pages
+
+
+# Skip hidden subjects and pages
+
+# Use an option for conditional code
+
+# Insecure direct object reference
+
+# Protect page visibility
+
+# Allow HTML in dynamic content
+
+# Preview content
