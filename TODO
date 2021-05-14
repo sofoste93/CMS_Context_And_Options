@@ -1,11 +1,20 @@
 Public Site vs. Staff Area
 
 # The public context
-
 - Staff can edit content (CRUD)
 - Public can only read content
 - Staff shows all subjects and pages
 - Public shows only visible subjects and pages
+- Staff shows content in raw form
+- Public shows content in finished form
+- Staff can preview not yet visible pages
+- Public cannot preview not yet visible pages
+
+# New Functions
+- find_all_visible_subjects()
+- find_all_subjects() and skip not visible
+- find_all_subjects($visible=false)
+- find_all_subjects($options=[])
 
 
 # Skip hidden subjects and pages
