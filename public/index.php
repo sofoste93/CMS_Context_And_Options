@@ -35,7 +35,7 @@ if(isset($_GET['id'])) {
     <?php
       if(isset($page)) {
         // show the page from the database
-        // TODO add html escaping back in
+        // ToDo add html escaping back in
         echo $page['content'];
 
       } else {
