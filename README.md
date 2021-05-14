@@ -8,5 +8,5 @@ Building a CMS: Use Context and Options
 # Contribution
 
 - Lynda.com
-- Kevin Skoglund
+- Kevin Skoglund (Instructor)
 - Stéphane Sob Fouodji
