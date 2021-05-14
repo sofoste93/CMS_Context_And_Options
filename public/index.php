@@ -1,26 +1,39 @@
 <?php require_once('../private/initialize.php'); ?>
 
 <?php
-if(isset($_GET['id'])) {
-  $page_id = $_GET['id'];
-  $page = find_page_by_id($page_id);
-  if(!$page) {
-    redirect_to(url_for('/index.php'));
-  }
-  $subject_id = $page['subject_id'];
-} elseif(isset($_GET['subject_id'])) {
-  $subject_id = $_GET['subject_id'];
+    // :.Preview
+    $preview = false;
+    if (isset($_GET['preview'])) {
+        // preview should require admin to be logged in
+        $preview = $_GET['preview'] == 'true' ? true : false; // ternary operator
+    }
+    $visible = !$preview; // to false by default - if preview=true, visible=false
 
-  $page_set = find_pages_by_subject_id($subject_id, ['visible' => true]); // ..
-  $page = mysqli_fetch_assoc($page_set); // first page
-  mysqli_free_result($page_set);
-  if(!$page) {
-    redirect_to(url_for('/index.php'));
-  }
-  $page_id = $page['id'];
-} else {
-  // nothing selected; show the homepage
-}
+    if(isset($_GET['id'])) {
+      $page_id = $_GET['id'];
+      $page = find_page_by_id($page_id, ['visible' => $visible]);
+      if(!$page) {
+        redirect_to(url_for('/index.php'));
+      }
+      $subject_id = $page['subject_id'];
+    } elseif(isset($_GET['subject_id'])) {
+      $subject_id = $_GET['subject_id'];
+
+      $subject = find_subject_by_id($subject_id, ['visible' => $visible]);
+      if (!$subject_id){
+          redirect_to(url_for('/index.php'));
+      }
+
+      $page_set = find_pages_by_subject_id($subject_id, ['visible' => $visible]); // ..
+      $page = mysqli_fetch_assoc($page_set); // first page
+      mysqli_free_result($page_set);
+      if(!$page) {
+        redirect_to(url_for('/index.php'));
+      }
+      $page_id = $page['id'];
+    } else {
+      // nothing selected; show the homepage
+    }
 
 ?>
 
@@ -36,7 +49,10 @@ if(isset($_GET['id'])) {
       if(isset($page)) {
         // show the page from the database
         // ToDo add html escaping back in
-        echo $page['content'];
+        // echo h($page['content']);
+        // echo $page['content'];
+          $allowed_tags = '<div><img><h1><p><strong><em><ul><li>'; // this is our WhiteList
+          echo strip_tags($page['content'], $allowed_tags);
 
       } else {
         // Show the homepage

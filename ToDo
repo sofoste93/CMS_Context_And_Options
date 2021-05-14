@@ -64,9 +64,32 @@ Public Site vs. Staff Area
 
 ============================================================================
 # Protect page visibility
+(!) check out the code update
 
 ============================================================================
 # Allow HTML in dynamic content
+    3 Approaches
+    - Symbolic language
+    - Markdown, https://daringfireball.net/projects/markdown
+    - HTMLPurifier, http://htmlpurifier.org
+
+    PHP-Tools
+    - strip_tags($string, $allowable_tags='')
+    - nl2br($string)  - it converts new line into br-tags
 
 ============================================================================
 # Preview content
+
+- Add preview link on /public/staff/pages/show.php
+- Include URL parameter "preview=true"
+- Opens /public/index.php in a new window
+- When previewing, does not check for page visibility
+- Will confirm user's login status later
+
+Changes performed:
+------------------
+=>
+
+=>
+
+=>
